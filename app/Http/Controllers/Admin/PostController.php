@@ -3,10 +3,17 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Post;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
+
+    public function index()
+    {
+        $posts = Post::paginate(15);
+        dd($posts);
+    }
 
     public function create()
     {
@@ -15,6 +22,16 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
-       return back()->withInput();
+        $data = $request->all();
+        $data['user_id'] = 1;
+        $data['is_active'] = true;
+
+        dd(Post::create($data));
+    }
+
+    public function show($id)
+    {
+        $post = Post::findOrFail($id);
+        dd($post);
     }
 }
