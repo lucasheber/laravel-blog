@@ -32,6 +32,20 @@ class PostController extends Controller
     public function show($id)
     {
         $post = Post::findOrFail($id);
-        dd($post);
+        return view('posts.edit', compact('post'));
+    }
+
+    public function update($id, Request $request)
+    {
+        $data = $request->all();
+        $post = Post::findOrFail($id);
+
+        dd($post->update($data));
+    }
+
+    public function destroy($id)
+    {
+        $post = Post::findOrFail($id);
+        $post->delete();
     }
 }
