@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Post;
+use App\User;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -23,10 +24,11 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        $data['user_id'] = 1;
         $data['is_active'] = true;
 
-        redirect()->route('posts.index');
+        $user = User::find(1);
+
+        dd($user->posts()->create($data));
     }
 
     public function show($id)
