@@ -1,3 +1,6 @@
+@extends('layouts.app')
+
+@section('content')
 <form action="{{route('posts.update', ['post' => $post->id])}}" method="post">
    @csrf
     @method("PUT")
@@ -13,7 +16,7 @@
 
     <div class="form-group">
         <label for="content">Conteúdo</label>
-        <input id="content" class="form-control" type="text" name="content" value="{{$post->content}}">
+        <textarea name="content"  class="form-control" id="content" cols="30" rows="10">{{$post->content}}</textarea>
     </div>
     <div class="form-group">
         <label for="slug">Slug</label>
@@ -23,8 +26,10 @@
     <button class="btn btn-lg btn-success">Atualizar</button>
 </form>
 
+<hr>
 <form action="{{route('posts.destroy', ['post' => $post->id])}}" method="post">
     @csrf
      @method("DELETE")
-     <button class="btn btn-lg btn-success">Remover</button>
+     <button class="btn btn-lg btn-danger">Remover</button>
 </form>
+@endsection

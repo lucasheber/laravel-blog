@@ -12,7 +12,7 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::paginate(15);
-        dd($posts);
+        return view('posts.index', compact('posts'));
     }
 
     public function create()
@@ -26,7 +26,7 @@ class PostController extends Controller
         $data['user_id'] = 1;
         $data['is_active'] = true;
 
-        dd(Post::create($data));
+        redirect()->route('posts.index');
     }
 
     public function show($id)
@@ -40,7 +40,7 @@ class PostController extends Controller
         $data = $request->all();
         $post = Post::findOrFail($id);
 
-        dd($post->update($data));
+        redirect()->route('posts.index');
     }
 
     public function destroy($id)

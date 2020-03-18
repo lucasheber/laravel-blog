@@ -1,3 +1,6 @@
+@extends('layouts.app')
+
+@section('content')
 <form action="{{route('posts.store')}}" method="post">
    @csrf
 
@@ -13,7 +16,7 @@
 
     <div class="form-group">
         <label for="content">Conteúdo</label>
-        <input id="content" class="form-control" type="text" name="content" value="{{old('content')}}">
+        <textarea name="content"  class="form-control" id="content" cols="30" rows="10">{{old('content')}}</textarea>
     </div>
     <div class="form-group">
         <label for="slug">Slug</label>
@@ -22,3 +25,4 @@
 
     <button class="btn btn-lg btn-success">Criar</button>
 </form>
+@endsection
