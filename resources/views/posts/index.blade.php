@@ -17,6 +17,7 @@
         <thead>
             <tr>
                 <th>#</th>
+                <th>Autor</th>
                 <th>Titulo</th>
                 <th>Status</th>
                 <th>Criado</th>
@@ -27,6 +28,7 @@
             @forelse ($posts as $post)
                 <tr>
                     <td>{{$post->id}}</td>
+                    <td>{{$post->user->name}}</td>
                     <td>{{$post->title}}</td>
 
                     <td>
