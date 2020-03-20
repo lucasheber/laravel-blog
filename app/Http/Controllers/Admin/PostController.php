@@ -28,6 +28,7 @@ class PostController extends Controller
 
         $user = User::find(1);
 
+        flash('Postagem criada com sucesso!')->success();
         dd($user->posts()->create($data));
     }
 
