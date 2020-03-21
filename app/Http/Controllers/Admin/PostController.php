@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Category;
 use App\Http\Controllers\Controller;
 use App\Post;
 use App\User;
@@ -10,45 +11,102 @@ use Illuminate\Http\Request;
 class PostController extends Controller
 {
 
+    /** @var Post */
+    private $post;
+
+    public function __construct(Post $post)
+    {
+        $this->post = $post;
+    }
+
     public function index()
     {
-        $posts = Post::paginate(15);
+        $posts = $this->post->paginate(15);
         return view('posts.index', compact('posts'));
     }
 
     public function create()
     {
-        return view('posts.create');
+        $categories = Category::all(['id', 'name']);
+        return view('posts.create', compact('categories'));
     }
 
     public function store(Request $request)
     {
         $data = $request->all();
-        $data['is_active'] = true;
 
-        $user = User::find(1);
+        try {
+            $data['is_active'] = true;
+            $user = User::find(1);
 
-        flash('Postagem criada com sucesso!')->success();
-        dd($user->posts()->create($data));
+            $post = $user->posts()->create($data);
+            $post->categories()->sync($data['categories']);
+
+            flash('Postagem criada com sucesso!')->success();
+            return redirect()->route('posts.index');
+
+        } catch (\Exception $e) {
+            $message = "Erro ao criar a postagem";
+
+            if (env('APP_DEBUG')) {
+                $message = $e->getMessage();
+            }
+
+            flash($message)->warning();
+
+            return redirect()->back();
+        }
+
     }
 
-    public function show($id)
+    public function show(Post $post)
     {
-        $post = Post::findOrFail($id);
-        return view('posts.edit', compact('post'));
+        $categories = Category::all(['id', 'name']);
+        return view('posts.edit', compact('post', 'categories'));
     }
 
-    public function update($id, Request $request)
+    public function update(Request $request, Post $post)
     {
         $data = $request->all();
-        $post = Post::findOrFail($id);
 
-        redirect()->route('posts.index');
+        try {
+            $post->update($data);
+            $post->categories()->sync($data['categories']);
+
+            flash("Postagem atualizada!")->success();
+            return redirect()->route('posts.show', ['post' => $post->id]);
+
+        } catch (\Exception $e) {
+
+            $message = "Erro ao atualizar a postagem!";
+
+            if (env('APP_DEBUG')) {
+                $message = $e->getMessage();
+            }
+
+            flash($message)->warning();
+            return redirect()->back();
+        }
     }
 
-    public function destroy($id)
+    public function destroy(Post $post)
     {
-        $post = Post::findOrFail($id);
-        $post->delete();
+
+        try {
+            $post->delete();
+
+            flash("Postagem '{$post->title}' removido!")->success();
+            return redirect()->route('posts.index');
+
+        } catch (\Exception $e) {
+            $message = "Postagem '{$post->title}' não removido";
+
+            if (env('APP_DEBUG')) {
+                $message = $e->getMessage();
+            }
+
+            flash($message)->warning();
+            return redirect()->back();
+        }
     }
 }
