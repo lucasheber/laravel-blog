@@ -21,11 +21,15 @@
             <li class="nav-item active">
                 <a href="{{route('posts.index')}}" class="nav-link">Posts</a>
             </li>
+            <li class="nav-item active">
+                <a href="{{route('categories.index')}}" class="nav-link">Categorias</a>
+            </li>
         </ul>
     </div>
     </nav>
 
     <div class="container">
+        @include('flash::message')
         @yield('content')
     </div>
 </body>

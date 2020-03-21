@@ -13,7 +13,7 @@ class CategoryController extends Controller
 
     public function __construct(Category $category)
     {
-        $this->$category = $category;
+        $this->category = $category;
     }
 
     /**
@@ -100,7 +100,7 @@ class CategoryController extends Controller
         try {
             $category->update($data);
             flash('Categoria atualizada!')->success();
-            return redirect('categories.show', ['category' => $category->id]);
+            return redirect()->route('categories.show', ['category' => $category->id]);
         } catch (\Exception $e) {
             $message = 'Error ao atualizar a categoria!';
 
