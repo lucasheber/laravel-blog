@@ -2,12 +2,12 @@
 
 @section('content')
     <div class="row">
-        <div class="col-sm-12">
-            <a href="{{ route('posts.create') }}" class="btn btn-success float-ritght">
+        <div class="col-sm-12 mt-5">
+            <a href="{{ route('posts.create') }}" class="btn btn-success float-right mb-5">
                 Criar Postagem
             </a>
 
-            <h2>Postagens Blog</h2>
+            <h2 class="mb-5">Postagens Blog</h2>
 
             <div class="clearfix"></div>
         </div>
