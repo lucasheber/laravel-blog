@@ -22,9 +22,13 @@ Route::get('hello', 'HelloWorldController@index');
 
 Route::resource('user', 'UserController');
 
-Route::prefix('admin')->namespace('Admin')->group(function () {
-    Route::resource('posts', 'PostController');
-    Route::resource('categories', 'CategoryController');
+Route::group(['middleware' => ['auth']], function () {
+
+    Route::prefix('admin')->namespace('Admin')->group(function () {
+        Route::resource('posts', 'PostController');
+        Route::resource('categories', 'CategoryController');
+    });
+
 });
 
 Auth::routes();

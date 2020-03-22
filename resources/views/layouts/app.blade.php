@@ -17,15 +17,22 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a href="{{route('posts.index')}}" class="nav-link">Posts</a>
-            </li>
-            <li class="nav-item active">
-                <a href="{{route('categories.index')}}" class="nav-link">Categorias</a>
-            </li>
-        </ul>
+        @auth
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a href="{{route('posts.index')}}" class="nav-link">Posts</a>
+                </li>
+                <li class="nav-item active">
+                    <a href="{{route('categories.index')}}" class="nav-link">Categorias</a>
+                </li>
+            </ul>
+        @endauth
     </div>
+    @auth
+        <div class="float-right">
+            <strong>{{auth()->user()->name}}</strong>
+        </div>
+    @endauth
     </nav>
 
     <div class="container">
