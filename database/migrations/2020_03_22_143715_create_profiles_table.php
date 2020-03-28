@@ -18,9 +18,9 @@ class CreateProfilesTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('avatar')->nullable();
             $table->text('about')->nullable();
-            $table->string('facebook_link');
-            $table->string('instagram_link');
-            $table->string('site_link');
+            $table->string('facebook_link')->nullable();
+            $table->string('instagram_link')->nullable();
+            $table->string('site_link')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');

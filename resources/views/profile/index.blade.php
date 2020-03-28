@@ -21,7 +21,7 @@
 
         <div class="form-group">
             <label for="about">Sobre</label>
-            <textarea name="about" id="" cols="30" rows="10" class="form-control">{{$user->about}}</textarea>
+            <textarea name="profile[about]" id="" cols="30" rows="10" class="form-control">{{$user->profile->about}}</textarea>
         </div>
 
         <div class="form-group">

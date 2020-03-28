@@ -18,7 +18,7 @@ class ProfileController extends Controller
             $user->profile()->create();
         }
 
-        return view('profile.index', compact($user));
+        return view('profile.index', compact('user'));
     }
 
     public function update(Request $request)
