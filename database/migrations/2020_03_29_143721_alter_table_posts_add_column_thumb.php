@@ -14,7 +14,7 @@ class AlterTablePostsAddColumnThumb extends Migration
     public function up()
     {
         Schema::table('posts', function (Blueprint $table) {
-            //
+            $table->string('thumb')->nullable();
         });
     }
 
@@ -26,7 +26,7 @@ class AlterTablePostsAddColumnThumb extends Migration
     public function down()
     {
         Schema::table('posts', function (Blueprint $table) {
-            //
+            $table->dropColumn('thumb');
         });
     }
 }
