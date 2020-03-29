@@ -35,6 +35,10 @@
       <ul class="navbar-nav ml-auto">
           <li class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toogle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>{{auth()->user()->name}}
+
+                    @if (auth()->user()->profile->avatar)
+                        <img src="{{ asset('storage/' . auth()->user()->profile->avatar) }}" alt="Foto de {auth()->user()->name}}" class="rounded-circle" width="50">
+                    @endif
                     <span class="caret"></span>
                 </a>
 

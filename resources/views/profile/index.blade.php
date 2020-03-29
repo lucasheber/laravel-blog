@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <form action="{{ route('profile.update') }}" method="POST">
+    <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
         @csrf
 
         <div class="form-group">
@@ -22,6 +22,11 @@
         <div class="form-group">
             <label for="about">Sobre</label>
             <textarea name="profile[about]" id="" cols="30" rows="10" class="form-control">{{$user->profile->about}}</textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="avatar">Avatar</label>
+            <input type="file" name="avatar">
         </div>
 
         <div class="form-group">
