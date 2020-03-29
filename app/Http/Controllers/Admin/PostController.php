@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Category;
+use App\Http\Controllers\Controller;
 use App\Post;
 use App\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -41,6 +42,12 @@ class PostController extends Controller
             /** @var User */
             $user = auth()->user();
 
+            if ($request->hasFile('thumb')) {
+                $data['thumb'] = $request->file('thumb')->store('thumbs', 'public');
+            } else {
+                unset($data['thumb']);
+            }
+
             $post = $user->posts()->create($data);
             $post->categories()->sync($data['categories']);
 
@@ -72,6 +79,13 @@ class PostController extends Controller
         $data = $request->all();
 
         try {
+            if ($request->hasFile('thumb')) {
+                Storage::disk('public')->delete($post->thumb);
+                $data['thumb'] = $request->file('thumb')->store('thumbs', 'public');
+            } else {
+                unset($data['thumb']);
+            }
+
             $post->update($data);
             $post->categories()->sync($data['categories']);
 

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<form action="{{route('posts.update', ['post' => $post->id])}}" method="post">
+<form action="{{route('posts.update', ['post' => $post->id])}}" method="post" enctype="multipart/form-data">
    @csrf
     @method("PUT")
     <div class="form-group">
@@ -21,6 +21,11 @@
     <div class="form-group">
         <label for="slug">Slug</label>
         <input id="slug" class="form-control" type="text" name="slug" value="{{$post->slug}}">
+    </div>
+
+    <div class="form-group">
+        <label for="thumb">Foto Capa</label>
+        <input type="file" name="thumb" id="thumb">
     </div>
 
     <div class="form-group">
