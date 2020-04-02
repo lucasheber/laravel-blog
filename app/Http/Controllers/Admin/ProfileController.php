@@ -12,7 +12,7 @@ class ProfileController extends Controller
 
     public function index()
     {
-
+        /** @var User */
         $user = auth()->user();
 
         if (!$user->profile()->count()) {
