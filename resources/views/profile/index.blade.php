@@ -6,12 +6,18 @@
 
         <div class="form-group">
             <label for="name">Nome</label>
-            <input type="text" name="user[name]" class="form-control" value="{{$user->name}}">
+            <input type="text" name="user[name]" class="form-control @error('user.name') is-invalid @enderror" value="{{$user->name}}">
+            @error('user.name')
+                <p class="invalid-feedbak">{{$message}}</p>
+            @enderror
         </div>
 
         <div class="form-group">
             <label for="email">E-mail</label>
-            <input type="email" name="user[email]" class="form-control" value="{{$user->email}}">
+            <input type="email" name="user[email]" class="form-control @error('user.email') is-invalid @enderror" value="{{$user->email}}">
+            @error('user.email')
+                <p class="invalid-feedbak">{{$message}}</p>
+            @enderror
         </div>
 
         <div class="form-group">
@@ -26,7 +32,10 @@
 
         <div class="form-group">
             <label for="avatar">Avatar</label>
-            <input type="file" name="avatar">
+            <input type="file" name="avatar" class="form-control @error('avatar') is-invalid @enderror">
+            @error('avatar')
+                <p class="invalid-feedbak">{{$message}}</p>
+            @enderror
         </div>
 
         <div class="form-group">
