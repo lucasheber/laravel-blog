@@ -6,17 +6,26 @@
 
     <div class="form-group">
         <label for="title">Titulo</label>
-    <input type="text" name="title" id="title" class="form-control" value="{{old('title')}}">
+        <input type="text" name="title" id="title" class="form-control @error('title') is-invalid @enderror" value="{{old('title')}}">
+        @error('title')
+            <p class="invalid-feedback">{{$message}}</p>
+        @enderror
     </div>
 
     <div class="form-group">
         <label for="description">Descrição</label>
-        <input id="description" class="form-control" type="text" name="description" value="{{old('description')}}">
+        <input id="description" class="form-control @error('description') is-invalid @enderror" type="text" name="description" value="{{old('description')}}">
+        @error('description')
+            <p class="invalid-feedback">{{$message}}</p>
+        @enderror
     </div>
 
     <div class="form-group">
         <label for="content">Conteúdo</label>
-        <textarea name="content"  class="form-control" id="content" cols="30" rows="10">{{old('content')}}</textarea>
+        <textarea name="content"  class="form-control @error('content') is-invalid @enderror" id="content" cols="30" rows="10">{{old('content')}}</textarea>
+        @error('content')
+            <p class="invalid-feedback">{{$message}}</p>
+        @enderror
     </div>
     <div class="form-group">
         <label for="slug">Slug</label>
@@ -25,7 +34,10 @@
 
     <div class="form-group">
         <label for="thumb">Foto Capa</label>
-        <input type="file" name="thumb" id="thumb">
+        <input type="file"  class="form-control @error('thumb') is-invalid @enderror"  name="thumb" id="thumb">
+        @error('thumb')
+            <p class="invalid-feedback">{{$message}}</p>
+        @enderror
     </div>
 
     <div class="form-group">
@@ -38,6 +50,9 @@
                 </div>
             @endforeach
         </div>
+        @error('categories')
+            <p class="invalid-feedback">{{$message}}</p>
+        @enderror
     </div>
 
     <button class="btn btn-lg btn-success">Criar</button>
