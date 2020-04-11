@@ -31,4 +31,13 @@ class PostRequest extends FormRequest
             'categories' => 'required',
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'required' => 'Este campo é obrigatório',
+            'min' => 'O campo deve possuir pelo menos :min carecteres',
+            'image' => 'Favor informe um formato de imagem válida'
+        ];
+    }
 }

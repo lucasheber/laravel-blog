@@ -22,7 +22,10 @@
 
         <div class="form-group">
             <label for="password">Senha</label>
-            <input type="password" name="user[password]" class="form-control" placeholder="Se deseja atualizar sua senha digite aqui a senha nova">
+            <input type="password" name="user[password]" class="form-control @error('user.password') is-invalid @enderror" placeholder="Se deseja atualizar sua senha digite aqui a senha nova">
+            @error('user.password')
+                <p class="invalid-feedbak">{{$message}}</p>
+            @enderror
         </div>
 
         <div class="form-group">
@@ -54,7 +57,7 @@
         </div>
 
         <div class="form-group">
-            <button class="btn btn-lg btn-succes">Atualizar Meu Perfil</button>
+            <button type="submit" class="btn btn-lg btn-succes">Atualizar Meu Perfil</button>
         </div>
     </form>
 @endsection
